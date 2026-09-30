@@ -9,51 +9,41 @@
     --accent:#2563eb; --accent2:#7c3aed; --gold:#c9a227;
     --bg:#f6f8fc; --card:#ffffff; --text:#16202e; --muted:#5b6b80; --line:#e4e9f2;
   }
-  body.dark{
-    --bg:#0d1420; --card:#151f30; --text:#e8eef7; --muted:#9fb0c6; --line:#24344d;
-  }
+  body.dark{ --bg:#0d1420; --card:#151f30; --text:#e8eef7; --muted:#9fb0c6; --line:#24344d; }
   *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;transition:background .3s,color .3s}
+  body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;transition:background .3s,color .3s;min-height:100vh;display:flex;flex-direction:column}
   /* NAV */
-  nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;
-      padding:14px 28px;background:color-mix(in srgb,var(--card) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  nav{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;
+      padding:14px 28px;background:color-mix(in srgb,var(--card) 90%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
   nav .logo{font-weight:800;font-size:1.1rem;letter-spacing:1px;background:linear-gradient(90deg,var(--accent),var(--accent2));
-      -webkit-background-clip:text;background-clip:text;color:transparent}
-  nav .links{display:flex;gap:22px;align-items:center}
-  nav a.nl{color:var(--muted);text-decoration:none;font-size:.92rem;font-weight:600}
-  nav a.nl:hover{color:var(--accent)}
+      -webkit-background-clip:text;background-clip:text;color:transparent;cursor:pointer}
+  nav .links{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+  .tab-btn{border:none;background:transparent;color:var(--muted);font-size:.92rem;font-weight:600;
+      padding:8px 14px;border-radius:20px;cursor:pointer;font-family:inherit;transition:all .2s}
+  .tab-btn:hover{color:var(--accent);background:var(--line)}
+  .tab-btn.active{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff}
   #themeBtn{cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--text);
-      border-radius:20px;padding:6px 14px;font-size:.85rem;font-weight:600}
+      border-radius:20px;padding:6px 14px;font-size:.85rem;font-weight:600;margin-left:6px}
   /* HERO */
-  .hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
-      padding:120px 24px 70px;color:#fff;position:relative;overflow:hidden;
+  .hero{padding:64px 24px 44px;color:#fff;text-align:center;position:relative;overflow:hidden;
       background:linear-gradient(135deg,#0f2743 0%,#1b3a5c 45%,#3b2a6d 100%)}
-  .hero::before{content:"";position:absolute;inset:0;opacity:.25;
+  .hero::before{content:"";position:absolute;inset:0;opacity:.22;
       background-image:radial-gradient(#ffffff33 1.5px,transparent 1.5px);background-size:34px 34px}
   .hero>*{position:relative;z-index:1}
-  .hero .hi{font-size:1rem;letter-spacing:3px;color:#cfe0f5;text-transform:uppercase;margin-bottom:10px}
-  .hero h1{font-size:clamp(2.4rem,6vw,4rem);font-weight:800;letter-spacing:1px}
+  .hero .hi{font-size:.9rem;letter-spacing:3px;color:#cfe0f5;text-transform:uppercase;margin-bottom:8px}
+  .hero h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:800;letter-spacing:1px}
   .hero h1 span{background:linear-gradient(90deg,#ffd97a,#ffb347);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .typed{font-size:1.25rem;color:#dbe7f7;margin-top:12px;min-height:2rem;font-weight:600}
-  .typed .caret{display:inline-block;width:3px;height:1.2em;background:#ffd97a;vertical-align:-2px;animation:blink 1s infinite}
+  .typed{font-size:1.15rem;color:#dbe7f7;margin-top:10px;min-height:1.9rem;font-weight:600}
+  .typed .caret{display:inline-block;width:3px;height:1.15em;background:#ffd97a;vertical-align:-2px;animation:blink 1s infinite}
   @keyframes blink{50%{opacity:0}}
-  .hero .contact{margin-top:18px;font-size:.92rem;color:#b9c8dc}
+  .hero .contact{margin-top:14px;font-size:.88rem;color:#b9c8dc}
   .hero .contact a{color:#fff;text-decoration:none;border-bottom:1px dotted var(--gold)}
-  .cta{margin-top:28px;display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
-  .btn{padding:12px 28px;border-radius:30px;font-weight:700;font-size:.95rem;text-decoration:none;transition:transform .2s}
-  .btn:hover{transform:translateY(-2px)}
-  .btn-gold{background:linear-gradient(90deg,#d4af37,#b8912a);color:#1a1405}
-  .btn-ghost{border:2px solid #ffffff66;color:#fff}
-  .stats{display:flex;gap:36px;margin-top:44px;flex-wrap:wrap;justify-content:center}
-  .stat{text-align:center}
-  .stat b{font-size:2rem;display:block;color:#ffd97a}
-  .stat span{font-size:.85rem;color:#c4d3e8}
-  /* SECTIONS */
-  main{max-width:960px;margin:0 auto;padding:60px 24px}
-  section{margin-bottom:56px;opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s}
-  section.visible{opacity:1;transform:none}
-  h2.sec{font-size:1.3rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:22px;display:flex;align-items:center;gap:12px}
+  /* TAB CONTENT */
+  main{max-width:960px;margin:0 auto;padding:36px 24px 50px;flex:1;width:100%}
+  .tab-panel{display:none;animation:fadeIn .35s ease}
+  .tab-panel.active{display:block}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  h2.sec{font-size:1.2rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:12px}
   h2.sec::after{content:"";flex:1;height:2px;background:linear-gradient(90deg,var(--accent),transparent)}
   /* SKILLS */
   .skill-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
@@ -61,12 +51,12 @@
   .skill-card:hover{transform:translateY(-3px);box-shadow:0 10px 24px #0002}
   .skill-card h4{font-size:.95rem;margin-bottom:8px}
   .bar{height:8px;background:var(--line);border-radius:6px;overflow:hidden}
-  .bar i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0;transition:width 1.2s ease}
+  .bar i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0;transition:width 1s ease}
   .skill-card small{color:var(--muted);font-size:.8rem}
   /* TIMELINE */
   .timeline{position:relative;padding-left:28px}
   .timeline::before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--accent),var(--accent2))}
-  .t-item{position:relative;margin-bottom:26px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+  .t-item{position:relative;margin-bottom:22px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
   .t-item::before{content:"";position:absolute;left:-26px;top:22px;width:12px;height:12px;border-radius:50%;
       background:var(--accent);border:3px solid var(--bg);box-shadow:0 0 0 2px var(--accent)}
   .t-item h3{font-size:1.02rem}
@@ -77,25 +67,30 @@
   /* PROJECTS */
   .proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px}
   .proj{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;transition:transform .2s,box-shadow .2s;position:relative;overflow:hidden}
-  .proj::top{content:""}
   .proj::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--gold),#e8c95a)}
   .proj:hover{transform:translateY(-4px);box-shadow:0 14px 30px #0003}
   .proj h3{font-size:1rem;margin-bottom:8px;color:var(--accent)}
   .proj p{font-size:.9rem;color:var(--muted)}
   .proj .ptags{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px}
   .proj .ptags span{font-size:.75rem;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:3px 10px;color:var(--muted)}
-  footer{text-align:center;padding:34px 20px;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line)}
-  @media(max-width:600px){nav .links a.nl{display:none}.stats{gap:22px}}
+  .stats{display:flex;gap:34px;margin-top:6px;flex-wrap:wrap}
+  .stat b{font-size:1.8rem;display:block;color:var(--accent)}
+  .stat span{font-size:.83rem;color:var(--muted)}
+  footer{text-align:center;padding:30px 20px;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line)}
+  footer a{color:var(--accent)}
+  @media(max-width:640px){.tab-btn{padding:7px 10px;font-size:.82rem}}
 </style>
 </head>
 <body>
 <nav>
-  <div class="logo">NL.</div>
+  <div class="logo" onclick="showTab('about')">NL.</div>
   <div class="links">
-    <a class="nl" href="#about">About</a><a class="nl" href="#skills">Skills</a>
-    <a class="nl" href="#experience">Experience</a><a class="nl" href="#projects">Projects</a>
-    <a class="nl" href="#education">Education</a>
-    <button id="themeBtn">🌙 Dark</button>
+    <button class="tab-btn active" data-tab="about" onclick="showTab('about')">About</button>
+    <button class="tab-btn" data-tab="skills" onclick="showTab('skills')">Skills</button>
+    <button class="tab-btn" data-tab="experience" onclick="showTab('experience')">Experience</button>
+    <button class="tab-btn" data-tab="projects" onclick="showTab('projects')">Projects</button>
+    <button class="tab-btn" data-tab="education" onclick="showTab('education')">Education</button>
+    <button id="themeBtn">🌙</button>
   </div>
 </nav>
 
@@ -104,25 +99,21 @@
   <h1>NAVYA <span>LANKA</span></h1>
   <div class="typed"><span id="typedText"></span><span class="caret"></span></div>
   <div class="contact">Ohio, USA &nbsp;•&nbsp; <a href="mailto:navyalanka97@gmail.com">navyalanka97@gmail.com</a> &nbsp;•&nbsp; <a href="https://www.linkedin.com/in/navya-lanka-8b1681262">LinkedIn</a></div>
-  <div class="cta">
-    <a class="btn btn-gold" href="mailto:navyalanka97@gmail.com">Hire Me</a>
-    <a class="btn btn-ghost" href="#projects">View Work</a>
-  </div>
-  <div class="stats">
-    <div class="stat"><b data-count="3">0</b><span>Employers</span></div>
-    <div class="stat"><b data-count="12">0</b><span>Core Skills</span></div>
-    <div class="stat"><b data-count="2">0</b><span>Degrees</span></div>
-    <div class="stat"><b data-count="3">0</b><span>Certifications</span></div>
-  </div>
 </div>
 
 <main>
-  <section id="about">
+  <div class="tab-panel active" id="panel-about">
     <h2 class="sec">About</h2>
     <p>Controls and automation engineer with hands-on experience in PLC programming, HMI development, and high-volume manufacturing support. I troubleshoot automated equipment using Allen-Bradley and Omron platforms, Cognex vision systems, VFDs, and industrial networks — with a focus on root-cause analysis, equipment commissioning, and keeping production lines running.</p>
-  </section>
+    <div class="stats" style="margin-top:26px">
+      <div class="stat"><b>3</b><span>Employers</span></div>
+      <div class="stat"><b>12</b><span>Core Skills</span></div>
+      <div class="stat"><b>2</b><span>Degrees</span></div>
+      <div class="stat"><b>3</b><span>Certifications</span></div>
+    </div>
+  </div>
 
-  <section id="skills">
+  <div class="tab-panel" id="panel-skills">
     <h2 class="sec">Core Skills</h2>
     <div class="skill-grid">
       <div class="skill-card"><h4>PLC Programming</h4><div class="bar"><i data-w="95"></i></div><small>Omron CJ2M · Allen-Bradley · Ladder Logic</small></div>
@@ -132,9 +123,9 @@
       <div class="skill-card"><h4>Drives &amp; Motion</h4><div class="bar"><i data-w="82"></i></div><small>VFD Configuration &amp; Troubleshooting</small></div>
       <div class="skill-card"><h4>Root-Cause Analysis</h4><div class="bar"><i data-w="92"></i></div><small>Fault Tracing · Corrective Actions</small></div>
     </div>
-  </section>
+  </div>
 
-  <section id="experience">
+  <div class="tab-panel" id="panel-experience">
     <h2 class="sec">Experience</h2>
     <div class="timeline">
       <div class="t-item">
@@ -165,9 +156,9 @@
         </ul>
       </div>
     </div>
-  </section>
+  </div>
 
-  <section id="projects">
+  <div class="tab-panel" id="panel-projects">
     <h2 class="sec">Featured Projects</h2>
     <div class="proj-grid">
       <div class="proj">
@@ -186,19 +177,28 @@
         <div class="ptags"><span>HMI</span><span>Diagnostics</span></div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <section id="education">
+  <div class="tab-panel" id="panel-education">
     <h2 class="sec">Education &amp; Certifications</h2>
     <p><strong>M.S. Electrical Engineering</strong> — Wright State University, Ohio, USA (2024)</p>
     <p><strong>B.E. Electronics &amp; Communication</strong> — Vijaya Institute of Technology for Women, India (2021)</p>
     <p style="margin-top:10px;color:var(--muted);font-size:.92rem">OSHA 30-Hour General Industry &nbsp;•&nbsp; GSIH Management of Change (MOC) &nbsp;•&nbsp; Safety Contract Management (SCM) L1 &amp; L3</p>
-  </section>
+  </div>
 </main>
 
-<footer>© 2026 Navya Lanka &nbsp;•&nbsp; Built with care &nbsp;•&nbsp; <a href="https://www.linkedin.com/in/navya-lanka-8b1681262" style="color:var(--accent)">LinkedIn</a></footer>
+<footer>© 2026 Navya Lanka &nbsp;•&nbsp; <a href="https://www.linkedin.com/in/navya-lanka-8b1681262">LinkedIn</a> &nbsp;•&nbsp; <a href="mailto:navyalanka97@gmail.com">Email</a></footer>
 
 <script>
+  // Tab switching — only the selected section shows
+  function showTab(name){
+    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===name));
+    const panel=document.getElementById('panel-'+name);
+    panel.classList.add('active');
+    panel.querySelectorAll('.bar i').forEach(b=>{b.style.width='0';setTimeout(()=>b.style.width=b.dataset.w+'%',80);});
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
   // Typing effect
   const roles=["Controls Engineer","PLC Programmer","Automation Engineer","HMI Developer"];
   const el=document.getElementById('typedText');let ri=0,ci=0,del=false;
@@ -211,19 +211,10 @@
   })();
   // Dark mode
   const btn=document.getElementById('themeBtn');
-  btn.onclick=()=>{document.body.classList.toggle('dark');
-    btn.textContent=document.body.classList.contains('dark')?'☀️ Light':'🌙 Dark';};
-  // Reveal on scroll + skill bars + counters
-  const io=new IntersectionObserver(es=>es.forEach(e=>{
-    if(!e.isIntersecting)return;
-    e.target.classList.add('visible');
-    e.target.querySelectorAll('.bar i').forEach(b=>b.style.width=b.dataset.w+'%');
-    e.target.querySelectorAll('[data-count]').forEach(s=>{
-      const t=+s.dataset.count;let c=0;const iv=setInterval(()=>{c++;s.textContent=c;if(c>=t)clearInterval(iv)},60);
-    });
-    io.unobserve(e.target);
-  }),{threshold:.15});
-  document.querySelectorAll('section,.hero .stats').forEach(s=>io.observe(s));
+  btn.onclick=()=>{document.body.classList.toggle('dark');btn.textContent=document.body.classList.contains('dark')?'☀️':'🌙';};
+  // Animate skill bars on first load
+  window.addEventListener('load',()=>setTimeout(()=>
+    document.querySelectorAll('#panel-skills .bar i').forEach(b=>b.style.width=b.dataset.w+'%'),300));
 </script>
 </body>
 </html>
