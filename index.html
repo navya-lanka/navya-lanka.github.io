@@ -20,7 +20,7 @@
   nav .logo{font-weight:800;font-size:1.05rem;letter-spacing:1px;cursor:pointer;color:var(--text)}
   nav .logo b{color:var(--accent)}
   nav .links{display:flex;gap:4px;align-items:center;flex-wrap:wrap}
-  .tab-btn{border:none;background:transparent;color:var(--muted);font-size:.9rem;font-weight:600;
+  .tab-btn{border:none;background:transparent;text-decoration:none;display:inline-block;color:var(--muted);font-size:.9rem;font-weight:600;
       padding:8px 13px;border-radius:20px;cursor:pointer;font-family:inherit;transition:all .2s}
   .tab-btn:hover{color:var(--accent);background:var(--line)}
   .tab-btn.active{background:var(--accent);color:#fff}
@@ -40,9 +40,9 @@
       border:5px solid var(--card);box-shadow:0 12px 30px #1f6feb33;flex-shrink:0}
   /* CONTENT */
   main{max-width:1020px;margin:0 auto;padding:10px 28px 60px;flex:1;width:100%}
-  .tab-panel{display:none;animation:fadeIn .35s ease}
-  .tab-panel.active{display:block}
-  @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  html{scroll-behavior:smooth}
+  main section{margin-bottom:64px;opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s;scroll-margin-top:80px}
+  main section.visible{opacity:1;transform:none}
   .sec-head{font-size:1.7rem;font-weight:800;margin-bottom:6px}
   .sec-sub{color:var(--muted);margin-bottom:26px;font-size:1.02rem}
   /* highlight cards */
@@ -88,13 +88,13 @@
 </head>
 <body>
 <nav>
-  <div class="logo" onclick="showTab('about')">NAVYA<b>LANKA</b></div>
+  <div class="logo" >NAVYA<b>LANKA</b></div>
   <div class="links">
-    <button class="tab-btn active" data-tab="about" onclick="showTab('about')">About</button>
-    <button class="tab-btn" data-tab="skills" onclick="showTab('skills')">Skills</button>
-    <button class="tab-btn" data-tab="experience" onclick="showTab('experience')">Experience</button>
-    <button class="tab-btn" data-tab="projects" onclick="showTab('projects')">Projects</button>
-    <button class="tab-btn" data-tab="education" onclick="showTab('education')">Education</button>
+    <a class="tab-btn" href="#about">About</a>
+    <a class="tab-btn" href="#skills">Skills</a>
+    <a class="tab-btn" href="#experience">Experience</a>
+    <a class="tab-btn" href="#projects">Projects</a>
+    <a class="tab-btn" href="#education">Education</a>
     <button id="themeBtn">🌙</button>
   </div>
 </nav>
@@ -115,7 +115,7 @@
 
 <main>
   <!-- ABOUT -->
-  <div class="tab-panel active" id="panel-about">
+  <section id="about">
     <div class="sec-head">Manufacturing controls, from logic to the production floor.</div>
     <p class="sec-sub">I am a Controls Engineer focused on industrial automation, PLC programming, HMI systems, commissioning, and troubleshooting in high-volume manufacturing environments.</p>
     <p>My experience includes Omron CJ2M and Allen-Bradley PLCs, HMI development, Cognex machine vision, barcode verification, industrial networks, VFDs, conveyors, sensors, and automated equipment. I enjoy solving production-critical automation problems through live diagnostics, root-cause analysis, safe controls modifications, and validation that improves equipment reliability and uptime.</p>
@@ -128,7 +128,7 @@
   </div>
 
   <!-- SKILLS -->
-  <div class="tab-panel" id="panel-skills">
+  <section id="skills">
     <div class="sec-head">Industrial automation toolkit.</div>
     <p class="sec-sub">Technical skills</p>
     <div class="sk-cat">
@@ -154,7 +154,7 @@
   </div>
 
   <!-- EXPERIENCE -->
-  <div class="tab-panel" id="panel-experience">
+  <section id="experience">
     <div class="sec-head">Professional experience.</div>
     <p class="sec-sub">&nbsp;</p>
     <div class="job">
@@ -191,7 +191,7 @@
   </div>
 
   <!-- PROJECTS -->
-  <div class="tab-panel" id="panel-projects">
+  <section id="projects">
     <div class="sec-head">Engineering case studies.</div>
     <p class="sec-sub">Featured projects</p>
     <div class="case">
@@ -219,7 +219,7 @@
   </div>
 
   <!-- EDUCATION -->
-  <div class="tab-panel" id="panel-education">
+  <section id="education">
     <div class="sec-head">Academic foundation.</div>
     <p class="sec-sub">Education &amp; certifications</p>
     <div class="edu">
@@ -240,12 +240,8 @@
 <footer>© 2026 Navya Lanka &nbsp;•&nbsp; <a href="https://www.linkedin.com/in/navya-lanka-8b1681262">LinkedIn</a> &nbsp;•&nbsp; <a href="mailto:navyalanka97@gmail.com">navyalanka97@gmail.com</a></footer>
 
 <script>
-  function showTab(name){
-    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===name));
-    document.getElementById('panel-'+name).classList.add('active');
-    window.scrollTo({top:0,behavior:'smooth'});
-  }
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}}),{threshold:.08});
+  document.querySelectorAll('main section').forEach(s=>io.observe(s));
   const btn=document.getElementById('themeBtn');
   btn.onclick=()=>{document.body.classList.toggle('dark');btn.textContent=document.body.classList.contains('dark')?'☀️':'🌙';};
 </script>
