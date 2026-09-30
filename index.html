@@ -5,101 +5,225 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Navya Lanka — Controls Engineer</title>
 <style>
-  :root { --accent:#1B3A5C; --gold:#C9A227; --dark:#1A1A1A; --gray:#5A5A5A; --bg:#F7F9FC; }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family:'Segoe UI',system-ui,-apple-system,sans-serif; color:var(--dark); background:var(--bg); line-height:1.6; }
-  header { background:linear-gradient(135deg,#1B3A5C,#274E77); color:#fff; text-align:center; padding:70px 20px 50px; }
-  header h1 { font-size:2.6rem; letter-spacing:2px; }
-  header p.sub { color:#D6E0EC; font-size:1.1rem; margin-top:8px; }
-  header .contact { margin-top:14px; font-size:.9rem; color:#B9C8DC; }
-  header .contact a { color:#fff; text-decoration:none; border-bottom:1px dotted var(--gold); }
-  .gold-bar { height:5px; background:var(--gold); }
-  main { max-width:900px; margin:0 auto; padding:40px 24px 60px; }
-  section { margin-bottom:38px; }
-  h2 { color:var(--accent); font-size:1.25rem; letter-spacing:1px; border-bottom:2px solid #E2E8F0; padding-bottom:8px; margin-bottom:16px; text-transform:uppercase; }
-  .tags { display:flex; flex-wrap:wrap; gap:8px; }
-  .tag { background:#E8EEF4; color:var(--accent); font-weight:600; font-size:.85rem; padding:6px 14px; border-radius:20px; }
-  .job { margin-bottom:20px; }
-  .job h3 { font-size:1.05rem; color:var(--dark); }
-  .job .dates { color:var(--gray); font-size:.88rem; font-style:italic; }
-  .job ul { margin:8px 0 0 20px; }
-  .job li { margin-bottom:5px; font-size:.96rem; }
-  .project { background:#fff; border:1px solid #E2E8F0; border-left:4px solid var(--gold); border-radius:6px; padding:16px 18px; margin-bottom:14px; }
-  .project h3 { color:var(--accent); font-size:1.02rem; margin-bottom:6px; }
-  .project p { font-size:.94rem; color:var(--gray); }
-  footer { text-align:center; padding:26px; color:var(--gray); font-size:.85rem; }
-  a { color:var(--accent); }
+  :root{
+    --accent:#2563eb; --accent2:#7c3aed; --gold:#c9a227;
+    --bg:#f6f8fc; --card:#ffffff; --text:#16202e; --muted:#5b6b80; --line:#e4e9f2;
+  }
+  body.dark{
+    --bg:#0d1420; --card:#151f30; --text:#e8eef7; --muted:#9fb0c6; --line:#24344d;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;transition:background .3s,color .3s}
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;
+      padding:14px 28px;background:color-mix(in srgb,var(--card) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  nav .logo{font-weight:800;font-size:1.1rem;letter-spacing:1px;background:linear-gradient(90deg,var(--accent),var(--accent2));
+      -webkit-background-clip:text;background-clip:text;color:transparent}
+  nav .links{display:flex;gap:22px;align-items:center}
+  nav a.nl{color:var(--muted);text-decoration:none;font-size:.92rem;font-weight:600}
+  nav a.nl:hover{color:var(--accent)}
+  #themeBtn{cursor:pointer;border:1px solid var(--line);background:var(--card);color:var(--text);
+      border-radius:20px;padding:6px 14px;font-size:.85rem;font-weight:600}
+  /* HERO */
+  .hero{min-height:92vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+      padding:120px 24px 70px;color:#fff;position:relative;overflow:hidden;
+      background:linear-gradient(135deg,#0f2743 0%,#1b3a5c 45%,#3b2a6d 100%)}
+  .hero::before{content:"";position:absolute;inset:0;opacity:.25;
+      background-image:radial-gradient(#ffffff33 1.5px,transparent 1.5px);background-size:34px 34px}
+  .hero>*{position:relative;z-index:1}
+  .hero .hi{font-size:1rem;letter-spacing:3px;color:#cfe0f5;text-transform:uppercase;margin-bottom:10px}
+  .hero h1{font-size:clamp(2.4rem,6vw,4rem);font-weight:800;letter-spacing:1px}
+  .hero h1 span{background:linear-gradient(90deg,#ffd97a,#ffb347);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .typed{font-size:1.25rem;color:#dbe7f7;margin-top:12px;min-height:2rem;font-weight:600}
+  .typed .caret{display:inline-block;width:3px;height:1.2em;background:#ffd97a;vertical-align:-2px;animation:blink 1s infinite}
+  @keyframes blink{50%{opacity:0}}
+  .hero .contact{margin-top:18px;font-size:.92rem;color:#b9c8dc}
+  .hero .contact a{color:#fff;text-decoration:none;border-bottom:1px dotted var(--gold)}
+  .cta{margin-top:28px;display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+  .btn{padding:12px 28px;border-radius:30px;font-weight:700;font-size:.95rem;text-decoration:none;transition:transform .2s}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-gold{background:linear-gradient(90deg,#d4af37,#b8912a);color:#1a1405}
+  .btn-ghost{border:2px solid #ffffff66;color:#fff}
+  .stats{display:flex;gap:36px;margin-top:44px;flex-wrap:wrap;justify-content:center}
+  .stat{text-align:center}
+  .stat b{font-size:2rem;display:block;color:#ffd97a}
+  .stat span{font-size:.85rem;color:#c4d3e8}
+  /* SECTIONS */
+  main{max-width:960px;margin:0 auto;padding:60px 24px}
+  section{margin-bottom:56px;opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s}
+  section.visible{opacity:1;transform:none}
+  h2.sec{font-size:1.3rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:22px;display:flex;align-items:center;gap:12px}
+  h2.sec::after{content:"";flex:1;height:2px;background:linear-gradient(90deg,var(--accent),transparent)}
+  /* SKILLS */
+  .skill-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+  .skill-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;transition:transform .2s,box-shadow .2s}
+  .skill-card:hover{transform:translateY(-3px);box-shadow:0 10px 24px #0002}
+  .skill-card h4{font-size:.95rem;margin-bottom:8px}
+  .bar{height:8px;background:var(--line);border-radius:6px;overflow:hidden}
+  .bar i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0;transition:width 1.2s ease}
+  .skill-card small{color:var(--muted);font-size:.8rem}
+  /* TIMELINE */
+  .timeline{position:relative;padding-left:28px}
+  .timeline::before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--accent),var(--accent2))}
+  .t-item{position:relative;margin-bottom:26px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+  .t-item::before{content:"";position:absolute;left:-26px;top:22px;width:12px;height:12px;border-radius:50%;
+      background:var(--accent);border:3px solid var(--bg);box-shadow:0 0 0 2px var(--accent)}
+  .t-item h3{font-size:1.02rem}
+  .t-item .dates{color:var(--accent);font-size:.83rem;font-weight:700;letter-spacing:.5px}
+  .t-item ul{margin:10px 0 0 18px;font-size:.94rem;color:var(--muted)}
+  .t-item li{margin-bottom:5px}
+  .t-item li::marker{color:var(--accent)}
+  /* PROJECTS */
+  .proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px}
+  .proj{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;transition:transform .2s,box-shadow .2s;position:relative;overflow:hidden}
+  .proj::top{content:""}
+  .proj::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--gold),#e8c95a)}
+  .proj:hover{transform:translateY(-4px);box-shadow:0 14px 30px #0003}
+  .proj h3{font-size:1rem;margin-bottom:8px;color:var(--accent)}
+  .proj p{font-size:.9rem;color:var(--muted)}
+  .proj .ptags{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px}
+  .proj .ptags span{font-size:.75rem;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:3px 10px;color:var(--muted)}
+  footer{text-align:center;padding:34px 20px;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line)}
+  @media(max-width:600px){nav .links a.nl{display:none}.stats{gap:22px}}
 </style>
 </head>
 <body>
-<header>
-  <h1>NAVYA LANKA</h1>
-  <p class="sub">Controls Engineer &nbsp;|&nbsp; Industrial Automation &nbsp;|&nbsp; PLC Programming</p>
-  <p class="contact">Ohio, USA &nbsp;•&nbsp; <a href="mailto:navyalanka97@gmail.com">navyalanka97@gmail.com</a> &nbsp;•&nbsp; <a href="https://www.linkedin.com/in/navya-lanka-8b1681262">LinkedIn</a></p>
-</header>
-<div class="gold-bar"></div>
+<nav>
+  <div class="logo">NL.</div>
+  <div class="links">
+    <a class="nl" href="#about">About</a><a class="nl" href="#skills">Skills</a>
+    <a class="nl" href="#experience">Experience</a><a class="nl" href="#projects">Projects</a>
+    <a class="nl" href="#education">Education</a>
+    <button id="themeBtn">🌙 Dark</button>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hi">Hello, I'm</div>
+  <h1>NAVYA <span>LANKA</span></h1>
+  <div class="typed"><span id="typedText"></span><span class="caret"></span></div>
+  <div class="contact">Ohio, USA &nbsp;•&nbsp; <a href="mailto:navyalanka97@gmail.com">navyalanka97@gmail.com</a> &nbsp;•&nbsp; <a href="https://www.linkedin.com/in/navya-lanka-8b1681262">LinkedIn</a></div>
+  <div class="cta">
+    <a class="btn btn-gold" href="mailto:navyalanka97@gmail.com">Hire Me</a>
+    <a class="btn btn-ghost" href="#projects">View Work</a>
+  </div>
+  <div class="stats">
+    <div class="stat"><b data-count="3">0</b><span>Employers</span></div>
+    <div class="stat"><b data-count="12">0</b><span>Core Skills</span></div>
+    <div class="stat"><b data-count="2">0</b><span>Degrees</span></div>
+    <div class="stat"><b data-count="3">0</b><span>Certifications</span></div>
+  </div>
+</div>
+
 <main>
-  <section>
-    <h2>About</h2>
-    <p>Controls and automation engineer with hands-on experience in PLC programming, HMI development, and high-volume manufacturing support. Skilled in troubleshooting automated equipment using Allen-Bradley and Omron platforms, Cognex vision systems, VFDs, and industrial networks. Experienced in root-cause analysis, equipment commissioning, and cross-functional production support.</p>
+  <section id="about">
+    <h2 class="sec">About</h2>
+    <p>Controls and automation engineer with hands-on experience in PLC programming, HMI development, and high-volume manufacturing support. I troubleshoot automated equipment using Allen-Bradley and Omron platforms, Cognex vision systems, VFDs, and industrial networks — with a focus on root-cause analysis, equipment commissioning, and keeping production lines running.</p>
   </section>
 
-  <section>
-    <h2>Core Skills</h2>
-    <div class="tags">
-      <span class="tag">Allen-Bradley / Studio 5000</span><span class="tag">Omron CJ2M</span><span class="tag">RSLogix 5000</span>
-      <span class="tag">Ladder Logic</span><span class="tag">HMI Development</span><span class="tag">Cognex Vision Systems</span>
-      <span class="tag">Barcode Verifiers</span><span class="tag">Ethernet/IP &amp; DeviceNet</span><span class="tag">VFD Troubleshooting</span>
-      <span class="tag">Root-Cause Analysis</span><span class="tag">Equipment Commissioning</span><span class="tag">AutoCAD Electrical</span>
-    </div>
-  </section>
-
-  <section>
-    <h2>Experience</h2>
-    <div class="job">
-      <h3>Controls Engineer (Contract) — General Motors, USA</h3>
-      <p class="dates">Nov 2025 – Present</p>
-      <ul>
-        <li>Troubleshoot automated assembly equipment (PLCs, HMIs, sensors, actuators) supporting line uptime</li>
-        <li>Create and modify HMI logic for improved fault diagnostics and operator response</li>
-        <li>Configure &amp; troubleshoot Cognex vision cameras (pattern matching, barcode reading) and barcode verifiers</li>
-        <li>Root-cause analysis tracing PLC logic, I/O signals, and Ethernet communications</li>
-        <li>Troubleshoot VFDs, Ethernet network faults, and field devices on the plant floor</li>
-      </ul>
-    </div>
-    <div class="job">
-      <h3>Electrical Engineer (Contract, Remote) — Cigna, USA</h3>
-      <p class="dates">May 2024 – Oct 2025</p>
-      <ul>
-        <li>Remote troubleshooting of electrical and controls system issues</li>
-        <li>Root-cause analysis and technical documentation of resolutions</li>
-      </ul>
-    </div>
-    <div class="job">
-      <h3>Automation Engineer — Tech Mahindra, India</h3>
-      <p class="dates">Sep 2021 – Nov 2022</p>
-      <ul>
-        <li>PLC ladder logic development and HMI applications for automation systems</li>
-        <li>Commissioning, troubleshooting, and technical documentation</li>
-      </ul>
+  <section id="skills">
+    <h2 class="sec">Core Skills</h2>
+    <div class="skill-grid">
+      <div class="skill-card"><h4>PLC Programming</h4><div class="bar"><i data-w="95"></i></div><small>Omron CJ2M · Allen-Bradley · Ladder Logic</small></div>
+      <div class="skill-card"><h4>HMI Development</h4><div class="bar"><i data-w="90"></i></div><small>Design · Logic · Troubleshooting</small></div>
+      <div class="skill-card"><h4>Cognex Vision</h4><div class="bar"><i data-w="88"></i></div><small>Cameras · Barcode Verifiers · Pattern Match</small></div>
+      <div class="skill-card"><h4>Industrial Networks</h4><div class="bar"><i data-w="85"></i></div><small>Ethernet/IP · DeviceNet</small></div>
+      <div class="skill-card"><h4>Drives &amp; Motion</h4><div class="bar"><i data-w="82"></i></div><small>VFD Configuration &amp; Troubleshooting</small></div>
+      <div class="skill-card"><h4>Root-Cause Analysis</h4><div class="bar"><i data-w="92"></i></div><small>Fault Tracing · Corrective Actions</small></div>
     </div>
   </section>
 
-  <section>
-    <h2>Featured Project</h2>
-    <div class="project">
-      <h3>Allen-Bradley PLC Conveyor Automation</h3>
-      <p>Designed and programmed an automated conveyor control system using Allen-Bradley PLCs and RSLogix 5000 — ladder logic for equipment sequencing with integrated sensors, actuators, and motor controls.</p>
+  <section id="experience">
+    <h2 class="sec">Experience</h2>
+    <div class="timeline">
+      <div class="t-item">
+        <div class="dates">NOV 2025 – PRESENT</div>
+        <h3>Controls Engineer (Contract) — General Motors, USA</h3>
+        <ul>
+          <li>Troubleshoot automated assembly equipment (PLCs, HMIs, sensors, actuators) supporting line uptime</li>
+          <li>Create and modify HMI logic for improved fault diagnostics and operator response</li>
+          <li>Configure &amp; troubleshoot Cognex vision cameras (pattern matching, barcode reading) and barcode verifiers</li>
+          <li>Root-cause analysis tracing PLC logic, I/O signals, and Ethernet communications</li>
+          <li>Diagnose VFDs, Ethernet network faults, and field devices on the plant floor</li>
+        </ul>
+      </div>
+      <div class="t-item">
+        <div class="dates">MAY 2024 – OCT 2025</div>
+        <h3>Electrical Engineer (Contract, Remote) — Cigna, USA</h3>
+        <ul>
+          <li>Remote troubleshooting of electrical and controls system issues</li>
+          <li>Root-cause analysis and technical documentation of resolutions</li>
+        </ul>
+      </div>
+      <div class="t-item">
+        <div class="dates">SEP 2021 – NOV 2022</div>
+        <h3>Automation Engineer — Tech Mahindra, India</h3>
+        <ul>
+          <li>PLC ladder logic development and HMI applications for automation systems</li>
+          <li>Commissioning, troubleshooting, and technical documentation</li>
+        </ul>
+      </div>
     </div>
   </section>
 
-  <section>
-    <h2>Education &amp; Certifications</h2>
+  <section id="projects">
+    <h2 class="sec">Featured Projects</h2>
+    <div class="proj-grid">
+      <div class="proj">
+        <h3>🎥 Vision System Integration — GM</h3>
+        <p>Configured and troubleshot Cognex vision cameras for pattern matching and barcode reading; set up barcode verifiers for quality verification on the assembly line.</p>
+        <div class="ptags"><span>Cognex</span><span>Vision</span><span>Barcode</span></div>
+      </div>
+      <div class="proj">
+        <h3>🏭 Conveyor Automation</h3>
+        <p>Designed and programmed an automated conveyor control system using Allen-Bradley PLCs and RSLogix 5000 — ladder logic for equipment sequencing with integrated sensors, actuators, and motor controls.</p>
+        <div class="ptags"><span>Allen-Bradley</span><span>RSLogix 5000</span><span>Ladder Logic</span></div>
+      </div>
+      <div class="proj">
+        <h3>🖥️ HMI Fault Diagnostics</h3>
+        <p>Created and modified HMI logic for real-time fault visibility, helping operators diagnose issues faster and reducing response time on the plant floor.</p>
+        <div class="ptags"><span>HMI</span><span>Diagnostics</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <h2 class="sec">Education &amp; Certifications</h2>
     <p><strong>M.S. Electrical Engineering</strong> — Wright State University, Ohio, USA (2024)</p>
     <p><strong>B.E. Electronics &amp; Communication</strong> — Vijaya Institute of Technology for Women, India (2021)</p>
-    <p style="margin-top:8px; color:var(--gray); font-size:.92rem;">OSHA 30-Hour General Industry &nbsp;•&nbsp; GSIH Management of Change (MOC) &nbsp;•&nbsp; Safety Contract Management (SCM) L1 &amp; L3</p>
+    <p style="margin-top:10px;color:var(--muted);font-size:.92rem">OSHA 30-Hour General Industry &nbsp;•&nbsp; GSIH Management of Change (MOC) &nbsp;•&nbsp; Safety Contract Management (SCM) L1 &amp; L3</p>
   </section>
 </main>
-<footer>© 2026 Navya Lanka</footer>
+
+<footer>© 2026 Navya Lanka &nbsp;•&nbsp; Built with care &nbsp;•&nbsp; <a href="https://www.linkedin.com/in/navya-lanka-8b1681262" style="color:var(--accent)">LinkedIn</a></footer>
+
+<script>
+  // Typing effect
+  const roles=["Controls Engineer","PLC Programmer","Automation Engineer","HMI Developer"];
+  const el=document.getElementById('typedText');let ri=0,ci=0,del=false;
+  (function type(){
+    const word=roles[ri];
+    el.textContent=word.slice(0,ci);
+    if(!del){ci++;if(ci>word.length){del=true;return setTimeout(type,1400)}}
+    else{ci--;if(ci===0){del=false;ri=(ri+1)%roles.length}}
+    setTimeout(type,del?40:80);
+  })();
+  // Dark mode
+  const btn=document.getElementById('themeBtn');
+  btn.onclick=()=>{document.body.classList.toggle('dark');
+    btn.textContent=document.body.classList.contains('dark')?'☀️ Light':'🌙 Dark';};
+  // Reveal on scroll + skill bars + counters
+  const io=new IntersectionObserver(es=>es.forEach(e=>{
+    if(!e.isIntersecting)return;
+    e.target.classList.add('visible');
+    e.target.querySelectorAll('.bar i').forEach(b=>b.style.width=b.dataset.w+'%');
+    e.target.querySelectorAll('[data-count]').forEach(s=>{
+      const t=+s.dataset.count;let c=0;const iv=setInterval(()=>{c++;s.textContent=c;if(c>=t)clearInterval(iv)},60);
+    });
+    io.unobserve(e.target);
+  }),{threshold:.15});
+  document.querySelectorAll('section,.hero .stats').forEach(s=>io.observe(s));
+</script>
 </body>
 </html>
